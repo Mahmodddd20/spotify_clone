@@ -2,9 +2,21 @@ import React from 'react';
 import icon from "../assets/Spotify_Icon.png"
 
 function Login() {
+    const CLIENT_ID = "93ff98fdec2345148e7b120be10be630"
+    const SPOTIFY_URL = "https://accounts.spotify.com/authorize"
+    const PROJECT_URL = "http://localhost:3000/"
+    const SPACE_BETWEEN_SCOPES = "%20";
+    const SCOPES = [
+        "user-read-currently-playing",
+        "user-read-playback-state",
+        "playlist-read-private"
+    ];
+
+    const SCOPES_WITH_SPACES = SCOPES.join(SPACE_BETWEEN_SCOPES);
+
 
     function handleLogin() {
-        window.location = `https://accounts.spotify.com/authorize?client_id=93ff98fdec2345148e7b120be10be630&redirect_uri=http://localhost:3000/search&scope=user-read-currently-playing%20user-read-playback-state%20playlist-read-private&response_type=token&show_dialog=true`;
+        window.location = `${SPOTIFY_URL}?client_id=${CLIENT_ID}&redirect_uri=${PROJECT_URL}search&scope=${SCOPES_WITH_SPACES}&response_type=token&show_dialog=true`;
     };
 
     return (
