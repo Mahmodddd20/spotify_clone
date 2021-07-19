@@ -20,6 +20,11 @@ function Search() {
             const {access_token, expires_in, token_type} =
                 getToken(window.location.hash);
 
+        localStorage.clear();
+        localStorage.setItem("accessToken", access_token);
+        localStorage.setItem("tokenType", token_type);
+        localStorage.setItem("expiresIn", expires_in);
+
     }, []);
 
     return (
