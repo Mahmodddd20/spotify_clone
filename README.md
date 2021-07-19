@@ -12,3 +12,9 @@
 10. Click on SAVE button
 11. In the spotify_clone folder run the command `npm start`
 12. Enjoy.
+
+
+**note:**
+if your app URL diffrent than `http://localhost:3000/` then you need to add it to
+- `PROJECT_URL` variable in `spotify-clone/src/pages/Login.js`
+-  `PROJECT_URL` variable in `spotify-clone/src/pages/Search.js`
