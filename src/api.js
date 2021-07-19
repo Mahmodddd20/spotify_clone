@@ -1,10 +1,12 @@
 import axios from 'axios';
 
+const TOKEN = localStorage.getItem('accessToken');
+
 const options = {
     headers: {
         'Accept': 'application/json',
         'Content-type': 'application/json',
-        'Authorization': 'Bearer ' + "TOKEN"
+        'Authorization': 'Bearer ' + TOKEN
     },
 }
 
@@ -13,9 +15,9 @@ export default {
         axios.get(`https://api.spotify.com/v1/search?q=${q}&type=artist&market=US&limit=10&offset=5`, options),
 
     getArtists: (id) =>
-        axios.get(`${SEARCH_BASE_URL}artists/${id}/albums?include_groups=single%2Cappears_on&market=ES&limit=${limit}&offset=5`, options),
+        axios.get(`https://api.spotify.com/v1/artists/${id}/albums?include_groups=single%2Cappears_on&market=ES&limit=${limit}&offset=5`, options),
 
     getArtistName: (id) =>
-        axios.get(`${SEARCH_BASE_URL}artists/${id}`, options),
+        axios.get(`https://api.spotify.com/v1/artists/${id}`, options),
 
 }
