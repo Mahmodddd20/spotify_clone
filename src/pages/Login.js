@@ -2,7 +2,7 @@ import React from 'react';
 import icon from "../assets/Spotify_Icon.png"
 
 export default function Login() {
-    const CLIENT_ID = "93ff98fdec2345148e7b120be10be630"
+    const CLIENT_ID = "Your Client Id"
     const SPOTIFY_URL = "https://accounts.spotify.com/authorize"
     const PROJECT_URL = "http://localhost:3000/"
     const SPACE_BETWEEN_SCOPES = "%20";
