@@ -5,8 +5,11 @@ function getToken(hash) {
     const stringAfterHashtag = hash.substring(1);
     const paramsInUrl = stringAfterHashtag.split("&");
 
-    return paramsInUrl;
-
+    return paramsInUrl.reduce((accumulator, currentValue) => {
+        const [key, value] = currentValue.split("=");
+        accumulator[key] = value;
+        return accumulator;
+    }, {});
 }
 
 
