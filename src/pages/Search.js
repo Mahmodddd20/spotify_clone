@@ -1,4 +1,5 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
+import api from "../api";
 
 function getToken(hash) {
 
@@ -15,6 +16,10 @@ function getToken(hash) {
 
 function Search() {
 
+    const [search, setSearch] = useState('');
+    const [result, setResult] = useState({});
+
+
     useEffect(() => {
 
             const {access_token, expires_in, token_type} =
@@ -26,6 +31,17 @@ function Search() {
         localStorage.setItem("expiresIn", expires_in);
 
     }, []);
+
+    useEffect(() => {
+
+        if (search.length > 0) {
+            api.getResult(search).then(response => {
+                setResult(response.data.artists.items)
+            });
+
+        }
+    }, [search]);
+
 
     return (
         <div className="grid grid-row-7 m-4 container justify-items-center">
