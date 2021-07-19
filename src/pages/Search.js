@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from "react";
 import api from "../api";
 import placeholder from "../assets/Spotify_placeholder.png"
+import {AiFillStar} from 'react-icons/ai';
 
 function getToken(hash) {
 
@@ -14,36 +15,59 @@ function getToken(hash) {
     }, {});
 }
 
-
-function Search() {
+export default function Search() {
 
     const PROJECT_URL = "http://localhost:3000/";
 
     const [search, setSearch] = useState('');
+    const [limit, setLimit] = useState(10);
     const [result, setResult] = useState({});
+    const [style, setStyle] = useState("text-center");
 
 
     useEffect(() => {
 
+        if (window.location.hash) {
             const {access_token, expires_in, token_type} =
                 getToken(window.location.hash);
 
-        localStorage.clear();
-        localStorage.setItem("accessToken", access_token);
-        localStorage.setItem("tokenType", token_type);
-        localStorage.setItem("expiresIn", expires_in);
-
+            localStorage.clear();
+            localStorage.setItem("accessToken", access_token);
+            localStorage.setItem("tokenType", token_type);
+            localStorage.setItem("expiresIn", expires_in);
+        }
     }, []);
 
     useEffect(() => {
 
         if (search.length > 0) {
-            api.getResult(search).then(response => {
+            api.getResult(search, limit).then(response => {
                 setResult(response.data.artists.items)
             });
+
             AllArtists();
         }
-    }, [search]);
+    }, [search, limit]);
+
+    useLayoutEffect(() => {
+        window.onscroll = () => {
+            setLimit(limit + 10)
+        }
+    }, [result]);
+
+    function stars(rating) {
+        return (
+            <div className="flex m-2">
+
+                {[...Array(5)].map((star, i) => {
+                    const ratingValue = i + 1;
+                    return (
+                        <AiFillStar color={ratingValue > Math.round(rating / 20) ? 'grey' : 'yellow'}/>
+                    );
+                })}
+            </div>
+        )
+    }
 
     function AllArtists() {
 
@@ -61,6 +85,9 @@ function Search() {
                                 <p className="m-2 text-gray-900">{value.name}</p>
                                 <p className="m-2 text-xs text-gray-600">{value.followers.total} followers</p>
                             </div>
+                            <div className=" bg-white w-full h-8">
+                                {stars(value.popularity)}
+                            </div>
                         </a>
                     </div>
                 )
@@ -68,12 +95,14 @@ function Search() {
         }
     }
 
-
     return (
         <div className="grid grid-row-7 m-4 container justify-items-center">
             <div className="row-span-2 flex relative border border-gray-200
             w-72 px-2 py-2 rounded m-4 shadow-sm text-sm text-gray-900">
-                <input className={`w-full placeholder-gray-900 text-sm`}
+                <input onChange={e => setSearch(e.target.value)} onKeyDown={() => {
+                    setStyle("capitalize")
+                }}
+                       className={`w-full ${style} placeholder-gray-900 text-sm`}
                        placeholder="Search for an artist..."
                        type="text"/>
                 <svg aria-hidden="true"
@@ -93,4 +122,3 @@ function Search() {
     );
 }
 
-export default Search;
