@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import api from "../api";
+import placeholder from "../assets/Spotify_placeholder.png"
 
 function getToken(hash) {
 
