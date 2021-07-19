@@ -38,9 +38,32 @@ function Search() {
             api.getResult(search).then(response => {
                 setResult(response.data.artists.items)
             });
-
+            AllArtists();
         }
     }, [search]);
+
+    function AllArtists() {
+
+        if (result.length > 0) {
+            return (result.map(value => {
+                return (
+                    <div className="border border-gray-200 rounded m-4 shadow-sm w-52">
+                        <a href={`${PROJECT_URL}albums/${value.id}`}>
+                            <div className=" w-full h-40">
+                                <img className="border border-gray-200 w-full h-40 object-cover"
+                                     alt={value.images}
+                                     src={value.images.length == 0 ? placeholder : value.images[0].url}/>
+                            </div>
+                            <div className="bg-white w-full h-20">
+                                <p className="m-2 text-gray-900">{value.name}</p>
+                                <p className="m-2 text-xs text-gray-600">{value.followers.total} followers</p>
+                            </div>
+                        </a>
+                    </div>
+                )
+            }))
+        }
+    }
 
 
     return (
@@ -59,6 +82,9 @@ function Search() {
                         fill="currentColor">
                     </path>
                 </svg>
+            </div>
+            <div className="row-span-5 flex flex-wrap">
+                {result.length > 0 ? AllArtists() : "No Result Yet"}
             </div>
         </div>
     );
