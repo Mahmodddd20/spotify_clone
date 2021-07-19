@@ -5,7 +5,6 @@ import Login from "./pages/Login";
 import Search from "./pages/Search";
 import Albums from "./pages/Albums";
 
-
 export default function App() {
     return (
         <div className="container mx-auto h-screen px-4 m-4">

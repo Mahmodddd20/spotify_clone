@@ -4,7 +4,6 @@ import placeholder from "../assets/Spotify_placeholder.png"
 import {AiFillStar} from 'react-icons/ai';
 
 function getToken(hash) {
-
     const stringAfterHashtag = hash.substring(1);
     const paramsInUrl = stringAfterHashtag.split("&");
 
@@ -16,7 +15,6 @@ function getToken(hash) {
 }
 
 export default function Search() {
-
     const PROJECT_URL = "http://localhost:3000/";
 
     const [search, setSearch] = useState('');
@@ -24,9 +22,7 @@ export default function Search() {
     const [result, setResult] = useState({});
     const [style, setStyle] = useState("text-center");
 
-
     useEffect(() => {
-
         if (window.location.hash) {
             const {access_token, expires_in, token_type} =
                 getToken(window.location.hash);
@@ -39,7 +35,6 @@ export default function Search() {
     }, []);
 
     useEffect(() => {
-
         if (search.length > 0) {
             api.getResult(search, limit).then(response => {
                 setResult(response.data.artists.items)
@@ -51,26 +46,27 @@ export default function Search() {
 
     useLayoutEffect(() => {
         window.onscroll = () => {
-            setLimit(limit + 10)
+            if (limit < 100) {
+                setLimit(limit + 10)
+            }
         }
     }, [result]);
 
     function stars(rating) {
         return (
             <div className="flex m-2">
-
                 {[...Array(5)].map((star, i) => {
                     const ratingValue = i + 1;
                     return (
-                        <AiFillStar color={ratingValue > Math.round(rating / 20) ? 'grey' : 'yellow'}/>
-                    );
+                        <AiFillStar
+                            color={ratingValue > Math.round(rating / 20)
+                                ? 'grey' : 'yellow'}/>);
                 })}
             </div>
         )
     }
 
     function AllArtists() {
-
         if (result.length > 0) {
             return (result.map(value => {
                 return (

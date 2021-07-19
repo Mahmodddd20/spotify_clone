@@ -3,29 +3,27 @@ import api from "../api";
 import placeholder from "../assets/Spotify_placeholder.png";
 
 export default function Albums(props) {
-
     const [name, setName] = useState('');
     const [result, setResult] = useState({});
     const [limit, setLimit] = useState(10);
 
     useEffect(() => {
-
         api.getArtistName(props.match.params.id).then(response => {
-            setName(response.data.name)
-        })
+            setName(response.data.name)})
+
         api.getArtists(props.match.params.id, limit).then(response => {
             setResult(response.data.items)
-        })
-            .catch(error => console.log(error))
+        }).catch(error => console.log(error))
 
     }, [props.match.params.id, limit]);
 
     useLayoutEffect(() => {
         window.onscroll = () => {
-            setLimit(limit + 10)
+            if(limit<100){
+                setLimit(limit + 10)
+            }
         }
     }, [result]);
-
 
     function renderAlbums() {
         return result.map(value => {
