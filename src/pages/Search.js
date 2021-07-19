@@ -1,7 +1,24 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+
+function getToken(hash) {
+
+    const stringAfterHashtag = hash.substring(1);
+    const paramsInUrl = stringAfterHashtag.split("&");
+
+    return paramsInUrl;
+
+}
 
 
 function Search() {
+
+    useEffect(() => {
+
+            const {access_token, expires_in, token_type} =
+                getToken(window.location.hash);
+
+    }, []);
+
     return (
         <div className="grid grid-row-7 m-4 container justify-items-center">
             <div className="row-span-2 flex relative border border-gray-200
