@@ -16,6 +16,8 @@ function getToken(hash) {
 
 function Search() {
 
+    const PROJECT_URL = "http://localhost:3000/";
+
     const [search, setSearch] = useState('');
     const [result, setResult] = useState({});
 
