@@ -20,7 +20,9 @@ export default function Albums(props) {
     useLayoutEffect(() => {
         window.onscroll = () => {
             if(limit<100){
-                setLimit(limit + 10)
+                setInterval(()=>{
+                    setLimit(limit + 10)
+                },2000)
             }
         }
     }, [result]);
@@ -45,7 +47,7 @@ export default function Albums(props) {
                         <p className="m-2 text-xs text-gray-600"> {value.total_tracks} tracks</p>
                     </div>
                     <div className=" w-full h-8 bg-gray-200 text-gray-500 text-xs text-center py-2">
-                        <a href={value.external_urls.spotify}>Preview on Spotify</a>
+                        <a href={value.external_urls.spotify} target="_blank">Preview on Spotify</a>
                     </div>
                 </div>
             )
