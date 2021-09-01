@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const SEARCH_BASE_URL = process.env.REACT_APP_SEARCH_BASE_URL;
-const SEARCH_TYPE = process.env.REACT_APP_SEARCH_SEARCH_TYPE;
+const SEARCH_TYPE = process.env.REACT_APP_SEARCH_TYPE;
 const TOKEN = localStorage.getItem('accessToken');
 
 const options = {
