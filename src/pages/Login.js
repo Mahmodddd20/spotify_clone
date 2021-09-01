@@ -9,7 +9,8 @@ export default function Login() {
     const SCOPES = [
         "user-read-currently-playing",
         "user-read-playback-state",
-        "playlist-read-private"
+        "playlist-read-private",
+        "playlist-read-collaborative"
     ];
 
     const SCOPES_WITH_SPACES = SCOPES.join(SPACE_BETWEEN_SCOPES);
