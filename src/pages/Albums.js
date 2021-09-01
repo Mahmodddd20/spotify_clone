@@ -20,9 +20,10 @@ export default function Albums(props) {
     useLayoutEffect(() => {
         window.onscroll = () => {
             if(limit<100){
-                setInterval(()=>{
+                setTimeout(() => {
                     setLimit(limit + 10)
-                },2000)
+                }, 5000)
+
             }
         }
     }, [result]);

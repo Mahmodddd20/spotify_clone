@@ -47,7 +47,9 @@ export default function Search() {
     useLayoutEffect(() => {
         window.onscroll = () => {
             if (limit < 100) {
-                setLimit(limit + 10)
+                setTimeout(() => {
+                    setLimit(limit + 10)
+                }, 5000)
             }
         }
     }, [result]);
