@@ -22,7 +22,7 @@ export default function Albums(props) {
             if(limit<100){
                 setTimeout(() => {
                     setLimit(limit + 10)
-                }, 5000)
+                }, 3000)
 
             }
         }

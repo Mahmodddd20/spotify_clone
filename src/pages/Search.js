@@ -49,7 +49,7 @@ export default function Search() {
             if (limit < 100) {
                 setTimeout(() => {
                     setLimit(limit + 10)
-                }, 5000)
+                }, 3000)
             }
         }
     }, [result]);
