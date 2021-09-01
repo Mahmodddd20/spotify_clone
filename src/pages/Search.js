@@ -15,7 +15,7 @@ function getToken(hash) {
 }
 
 export default function Search() {
-    const PROJECT_URL = "http://localhost:3000/";
+    const PROJECT_URL = process.env.REACT_APP_PROJECT_URL
 
     const [search, setSearch] = useState('');
     const [limit, setLimit] = useState(10);

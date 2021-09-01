@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const SEARCH_BASE_URL = "https://api.spotify.com/v1/";
-const SEARCH_TYPE = "artist";
+const SEARCH_BASE_URL = process.env.REACT_APP_SEARCH_BASE_URL;
+const SEARCH_TYPE = process.env.REACT_APP_SEARCH_SEARCH_TYPE;
 const TOKEN = localStorage.getItem('accessToken');
 
 const options = {
